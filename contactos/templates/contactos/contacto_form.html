@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}{% if form.instance.pk %}Editar Contacto{% else %}Nuevo Contacto{% endif %}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">{% if form.instance.pk %}Modificar Contacto: {{ form.instance.codigo }}{% else %}Registrar Nuevo Contacto{% endif %}</h5>
+            </div>
+            <div class="card-body p-4">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Código:</label>
+                            {{ form.codigo }}
+                            {% if form.codigo.errors %}
+                                <div class="text-danger small mt-1">{{ form.codigo.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">RIF (Formato V-12345678-0):</label>
+                            {{ form.rif }}
+                            {% if form.rif.errors %}
+                                <div class="text-danger small mt-1">{{ form.rif.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Nombres:</label>
+                            {{ form.nombres }}
+                            {% if form.nombres.errors %}
+                                <div class="text-danger small mt-1">{{ form.nombres.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Apellidos:</label>
+                            {{ form.apellidos }}
+                            {% if form.apellidos.errors %}
+                                <div class="text-danger small mt-1">{{ form.apellidos.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Teléfono Oficina (Opcional):</label>
+                            {{ form.telefono_oficina }}
+                            {% if form.telefono_oficina.errors %}
+                                <div class="text-danger small mt-1">{{ form.telefono_oficina.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Teléfono Móvil:</label>
+                            {{ form.telefono_movil }}
+                            {% if form.telefono_movil.errors %}
+                                <div class="text-danger small mt-1">{{ form.telefono_movil.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-bold">Correo Electrónico:</label>
+                            {{ form.correo }}
+                            {% if form.correo.errors %}
+                                <div class="text-danger small mt-1">{{ form.correo.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-top d-flex justify-content-between">
+                        <a href="{% url 'contacto_list' %}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary px-4">Guardar Registro</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
